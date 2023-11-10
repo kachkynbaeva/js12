@@ -1,19 +1,35 @@
-const baloons=document.querySelectorAll(`.box`)
-const checkBox =document.querySelectorAll(`.checkbox`)
-const allcheck=document.querySelectorAll(`.allcheck`)
-baloons.forEach((baloon,idx)=>{
-    baloon.addEventListener(`click`,()=>{
-        baloon.classList.toggle(`bgRed`)
-        checkBox[idx].checked = !checkBox[idx].checked
+const balloons=document.querySelectorAll('.box')
+const checkbox=document.querySelectorAll('.checkbox')
+const selectAll=document.querySelector('#selectAll')
+
+
+const handleClick = (balloon, idx ) => {
+    balloon.classList.toggle('bgRed')
+    console.log(balloon.classList)
+    checkbox [idx] .checked= !checkbox[idx].checked
+    const arrBallons = Array.from(balloons)
+    selectAll.checked = ! ! arrBallons.every(el=> el.classList[1] === 'bgRed')
+}
+
+checkbox.forEach(el => {
+    el.addEventListener('click', () => {
+        el.checked = ! el.checked
     })
 })
-allcheck.addEventListener('click',()=>{
-    const innercheck = input[0].checked
-    input.forEach((el,idx)=>{
-        el.checked = !innercheck
-        balloon.forEach((balloon)=>{
-            balloon.classList.toggle('bgRed')
-        })
-    })
 
+balloons.forEach((el,idx) => {
+    el.addEventListener('click', () => handleClick(el, idx))
+})
+
+
+selectAll.addEventListener('click', () => {
+    if (selectAll.checked) {
+        balloons.forEach(el =>
+            el.classList.add('bgRed'))
+        checkbox.forEach(el => el.checked = true)
+    } else {
+        balloons.forEach(el =>
+            el.classList.add('bgRed'))
+        checkbox.forEach(el => el.checked = false)
+    }
 })
